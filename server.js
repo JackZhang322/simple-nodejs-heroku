@@ -102,8 +102,8 @@ app.get('/enable', (req, res) => {
       process.stdout.write(d);
     });
   });
-  
-  req2.write("'referenceId:dcacdec5-e9d2-43a8-bade-7baf7b19ccb7'");
+  process.stdout.write(JSON.stringify(options));
+  req2.write("'75e1cdac-030b-46f4-bd7d-316345ef0f1d'");
   req2.end();
   
   res.send({
