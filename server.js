@@ -50,8 +50,10 @@ app.get('/disable', (req, res) => {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer ' + auth,
-      'newPath': 'referenceId:dcacdec5-e9d2-43a8-bade-7baf7b19ccb7'
-    }
+      "content-length": "50",
+    },
+    bodyRaw: 'referenceId:dcacdec5-e9d2-43a8-bade-7baf7b19ccb7',
+    body: 'referenceId:dcacdec5-e9d2-43a8-bade-7baf7b19ccb7'
   };
   
   const req2 = https.request(options, function(res2) {
