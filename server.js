@@ -53,12 +53,14 @@ app.get('/disable', (req, res) => {
     }
   };
   
+  
   const req2 = https.request(options, function(res2) {
     //dont really need callback but im not sure if i can remove it
     res2.on('data', (d) => {
       process.stdout.write(d);
     });
   });
+  process.stdout.write(JSON.stringify(options));
   req2.write("'referenceId:dcacdec5-e9d2-43a8-bade-7baf7b19ccb7'");
   req2.end();
   
