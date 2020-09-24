@@ -49,8 +49,7 @@ app.get('/disable', (req, res) => {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer ' + auth,
-      "content-length": "50"
+      'Authorization': 'Bearer ' + auth
     }
   };
   
