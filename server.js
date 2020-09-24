@@ -59,8 +59,7 @@ app.get('/disable', (req, res) => {
       process.stdout.write(d);
     });
   });
-
-
+  req2.write("'referenceId:dcacdec5-e9d2-43a8-bade-7baf7b19ccb7'");
   req2.end();
   
   //end soti call
