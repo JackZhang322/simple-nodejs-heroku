@@ -32,7 +32,7 @@ app.get('/colour', (req, res) => {
 
 app.get('/disable', (req, res) => {
   // Extract some parameters from qualtrics
-  const devId = req.query.devId;
+  const devid = req.query.devId;
   const auth = req.query.auth;
 
   
@@ -44,7 +44,7 @@ app.get('/disable', (req, res) => {
   const options = {
     host: 's111720.mobicontrolcloud.com',
     port: 443,
-    path: '/MobiControl/api/devices/' + devId + '/parentPath',
+    path: '/MobiControl/api/devices/' + devid + '/parentPath',
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
