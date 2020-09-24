@@ -32,7 +32,7 @@ app.get('/colour', (req, res) => {
 
 app.get('/disable', (req, res) => {
   // Extract some parameters from qualtrics
-  const devid = req.query.devId;
+  const devid = req.query.devid;
   const auth = req.query.auth;
 
   
@@ -79,7 +79,7 @@ app.get('/disable', (req, res) => {
 
 app.get('/enable', (req, res) => {
   // Extract some parameters
-  const devId = req.query.devId;
+  const devid = req.query.devid;
   const auth = req.query.auth;
   const https = require('https');
 
@@ -87,13 +87,12 @@ app.get('/enable', (req, res) => {
   const options = {
     host: 's111720.mobicontrolcloud.com',
     port: 443,
-    path: '/MobiControl/api/devices/' + devId + '/parentPath',
+    path: '/MobiControl/api/devices/' + devid + '/parentPath',
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer ' + auth,
-      'newPath': 'referenceId:75e1cdac-030b-46f4-bd7d-316345ef0f1d'
     }
   }
   
@@ -104,8 +103,9 @@ app.get('/enable', (req, res) => {
     });
   });
   
-  
+  req2.write("'referenceId:dcacdec5-e9d2-43a8-bade-7baf7b19ccb7'");
   req2.end();
+  
   res.send({
     Message: 'reached end of block'}
     );
