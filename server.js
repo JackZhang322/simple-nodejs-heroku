@@ -81,8 +81,8 @@ app.get('/enable', (req, res) => {
   // Extract some parameters
   const devid = req.query.devid;
   const auth = req.query.auth;
-  const https = require('https');
 
+  const https = require('https');
 
   const options = {
     host: 's111720.mobicontrolcloud.com',
@@ -103,7 +103,7 @@ app.get('/enable', (req, res) => {
     });
   });
   process.stdout.write(JSON.stringify(options));
-  req2.write("'75e1cdac-030b-46f4-bd7d-316345ef0f1d'");
+  req2.write("'referenceId:75e1cdac-030b-46f4-bd7d-316345ef0f1d'");
   req2.end();
   
   res.send({
