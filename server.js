@@ -1,35 +1,9 @@
 const express = require('express');
 const app = express();
 
-var colours = {
-  Jim : 'blue',
-  Dwight : 'orange',
-  Pam : 'red',
-  Michael : 'blue',
-  Toby : 'grey',
-  Creed : 'black',
-  Andy : 'purple'};
 
 
-app.get('/colour', (req, res) => {
-  
-    // Extract some parameters
-    const name = req.query.name;
-    if(name == '') {
-       name = 'unknown'; 
-    }
-
- 
-    if (name in colours) {
-      const colour = colours[name];
-    };  
-  if (!(name in colours)) {
-      const colour = 'unknown';
-    };  
-    res.send({ info: colour, result: 'success', rc: 0 });
-
-  });
-
+// Restricts phone by moving it to the Bricked Devices Group
 app.get('/disable', (req, res) => {
   // Extract some parameters from qualtrics
   const devid = req.query.devid;
@@ -44,6 +18,7 @@ app.get('/disable', (req, res) => {
   const options = {
     host: 's111720.mobicontrolcloud.com',
     port: 443,
+    //you will need to change the host and port to whatever Soti server you are using
     path: '/MobiControl/api/devices/'+devid+'/parentPath',
     method: 'PUT',
     headers: {
@@ -53,30 +28,27 @@ app.get('/disable', (req, res) => {
     }
   };
   
-  
+  //send http request to Soti
   const req2 = https.request(options, function(res2) {
-    //dont really need callback but im not sure if i can remove it
     res2.on('data', (d) => {
       process.stdout.write(d);
     });
   });
   process.stdout.write(JSON.stringify(options));
   req2.write("'referenceId:dcacdec5-e9d2-43a8-bade-7baf7b19ccb7'");
+  //this write function here passes on the group id to Soti. Replace this with your reference id for the bricked group
   req2.end();
   
   //end soti call
   
   
-  res.send({ Message: 'reached end of block'});
+  res.send({ 
+    Message: 'reached end of block'
+  });
 });
 
-// testing alternate code
-//const disreq = new XMLHttpRequest();
-//disreq.open('PUT', 'https://s111720.mobicontrolcloud.com/MobiControl/api/devices/' + devId + '/parentPath');
-//disreq.responseType = 'application/json';
-//disreq.send();
 
-
+//Opposite function to disable. Moves the device back to the active devices group
 app.get('/enable', (req, res) => {
   // Extract some parameters
   const devid = req.query.devid;
@@ -87,6 +59,7 @@ app.get('/enable', (req, res) => {
   const options = {
     host: 's111720.mobicontrolcloud.com',
     port: 443,
+    //you will need to change the host and port to whatever Soti server you are using
     path: '/MobiControl/api/devices/' + devid + '/parentPath',
     method: 'PUT',
     headers: {
@@ -97,13 +70,13 @@ app.get('/enable', (req, res) => {
   }
   
   const req2 = https.request(options, function(res2) {
-    //dont really need callback but im not sure if i can remove it
     res2.on('data', (d) => {
       process.stdout.write(d);
     });
   });
   process.stdout.write(JSON.stringify(options));
   req2.write("'referenceId:75e1cdac-030b-46f4-bd7d-316345ef0f1d'");
+  //Replace this reference id with the reference id of your active devices group
   req2.end();
   
   res.send({
